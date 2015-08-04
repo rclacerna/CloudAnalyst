@@ -85,4 +85,5 @@ public interface Constants {
 	final String LOAD_BALANCE_POLICY_RR = "Round Robin";
 	final String LOAD_BALANCE_ACTIVE = "Equally Spread Current Execution Load";
 	final String LOAD_BALANCE_THROTTLED = "Throttled";
+	final String LOAD_BALANCE_BEE = "Clustered Bee";
 }

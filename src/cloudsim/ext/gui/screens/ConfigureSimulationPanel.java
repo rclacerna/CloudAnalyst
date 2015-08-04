@@ -90,7 +90,7 @@ public class ConfigureSimulationPanel extends JPanel
 	private static final String LBL_ADD_NEW = "Add New";
 	private static final int TABLE_HEIGHT = 80;
 	private static final Dimension TABLE_DIMENSION = new Dimension(650, TABLE_HEIGHT);
-	private static final Dimension BTN_DIMENSION = new Dimension(100, 25);
+	private static final Dimension BTN_DIMENSION = new Dimension(100, 28);
 	private static final String SIM_FILE_EXTENSION = ".sim";
 	private static final String TIME_UNIT_DAYS = "days";
 	private static final String TIME_UNIT_HOURS = "hours";
@@ -284,9 +284,9 @@ public class ConfigureSimulationPanel extends JPanel
 		JLabel lblVmHeading = new JLabel("<html>Application<br/>Deployment<br/>Configuration:</html>");
 		lblVmHeading.setBounds(x, y, compW, compH);
 		mainTab.add(lblVmHeading);
-		
+
 		x += compW + hGap * 2;
-		compW = 150; 
+		compW = 150;
 		compH = 20;
 		JLabel lblServiceBroker = new JLabel("Service Broker Policy:");
 		lblServiceBroker.setBounds(x, y, compW, compH);
@@ -388,7 +388,7 @@ public class ConfigureSimulationPanel extends JPanel
 		x = leftMargin;
 		y += lastCompH + vGap;
 		compW = 240;
-		lastCompH = compH = 70;
+		lastCompH = compH = 95;
 		JLabel lblDcRequestGrouping = new JLabel("<html>Request grouping factor in Data Centers:" +
 				                                  "<br/>(Equivalent to number of simultaneous" +
 				                                  "<br/> requests a single applicaiton server" +
@@ -407,7 +407,7 @@ public class ConfigureSimulationPanel extends JPanel
 		x = leftMargin;
 		y += lastCompH + vGap;
 		compW = 240;
-		compH = 30;
+		compH = 50;
 		JLabel lblInstructionLength = new JLabel("<html>Executable instruction length per request:" +
 				                                  "<br/>(bytes)</html>");
 		lblInstructionLength.setBounds(x, y, compW, compH);
@@ -436,11 +436,12 @@ public class ConfigureSimulationPanel extends JPanel
 				Constants.LOAD_BALANCE_POLICY_RR, 
 				Constants.LOAD_BALANCE_ACTIVE,
 				Constants.LOAD_BALANCE_THROTTLED,
+				Constants.LOAD_BALANCE_BEE,
 		});
 		cmbLoadBalancingPolicy.setSelectedItem(simulation.getLoadBalancePolicy());
 		cmbLoadBalancingPolicy.setBounds(x, y, compW, compH);
 		advancedTab.add(cmbLoadBalancingPolicy);
-		
+
 		return advancedTab;
 	}
 	

@@ -6,9 +6,9 @@
 
 Version: SimJava 2.0
 
-Simulation date:         02 August 2015
-Simulation start time:   20:56:26 IST
-Simulation end time:     20:56:27 IST
+Simulation date:         04 August 2015
+Simulation start time:   17:35:41 IST
+Simulation end time:     17:35:43 IST
 
 ############################################################
 #            Overall simulation run information            #
@@ -231,17 +231,17 @@ Minimum:              0.0
 
 - UB Response time
 
-Sample mean:          300.05616085170834
-Sample variance:      434.029270390977
-Sample std deviation: 20.833369156019316
+Sample mean:          300.0561608491166
+Sample variance:      434.02927877018374
+Sample std deviation: 20.83336935711993
 Maximum:              369.11519830842735
 Minimum:              237.0591758233495
 
 - Hourly Response Time-0
 
-Sample mean:          300.05616085170834
-Sample variance:      434.029270390977
-Sample std deviation: 20.833369156019316
+Sample mean:          300.0561608491166
+Sample variance:      434.02927877018374
+Sample std deviation: 20.83336935711993
 Maximum:              369.11519830842735
 Minimum:              237.0591758233495
 

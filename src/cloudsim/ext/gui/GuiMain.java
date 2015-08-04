@@ -44,6 +44,7 @@ import cloudsim.ext.gui.screens.SimulationPanel;
  * @author Bhathiya Wickremasinghe
  *
  */
+
 public class GuiMain extends JFrame implements ActionListener, CloudSimEventListener {
 
 private static final String CMD_ABOUT = "About";
@@ -90,7 +91,7 @@ private static final String CMD_ABOUT = "About";
 		showHomeScreen();
 		
 	}
-	
+
 	private void initUI(){		
 		this.setTitle("Cloud Analyst");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

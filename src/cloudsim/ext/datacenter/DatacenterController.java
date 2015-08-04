@@ -77,7 +77,7 @@ public class DatacenterController extends DatacenterBroker implements GeoLocatab
 		
 		System.out.println("Creating new broker " + get_name());
 		
-		listeners =new ArrayList<CloudSimEventListener>();
+		listeners = new ArrayList<CloudSimEventListener>();
 		
 		this.region = region;
 		this.costPerVmHour = costPerVmHour;
@@ -103,10 +103,14 @@ public class DatacenterController extends DatacenterBroker implements GeoLocatab
 			this.loadBalancer = new ActiveVmLoadBalancer(this);
 		} else if (loadBalancePolicy.equals(Constants.LOAD_BALANCE_POLICY_RR)){
 			this.loadBalancer = new RoundRobinVmLoadBalancer(vmStatesList);
+
+		} else if (loadBalancePolicy.equals(Constants.LOAD_BALANCE_BEE)){
+			this.loadBalancer = new BeeVmLoadBalancer(this);//TODO: change the class name and parameter
+
 		} else { //i.e. if (loadBalancePolicy.equals(Constants.LOAD_BALANCE_THROTTLED))
 			this.loadBalancer = new ThrottledVmLoadBalancer(this);
 		}
-		
+
 	}
 	
 	
