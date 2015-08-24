@@ -40,10 +40,10 @@ import gridsim.GridSimTags;
  * @author Bhathiya Wickremasinghe
  *
  */
+
 public class DatacenterController extends DatacenterBroker implements GeoLocatable,
 																		  CloudsimObservable,
 																		  Constants {
-	
 
 	private List<CloudSimEventListener> listeners;
 	private VmLoadBalancer loadBalancer;
@@ -101,11 +101,12 @@ public class DatacenterController extends DatacenterBroker implements GeoLocatab
 		
 		if (loadBalancePolicy.equals(Constants.LOAD_BALANCE_ACTIVE)){
 			this.loadBalancer = new ActiveVmLoadBalancer(this);
+
 		} else if (loadBalancePolicy.equals(Constants.LOAD_BALANCE_POLICY_RR)){
 			this.loadBalancer = new RoundRobinVmLoadBalancer(vmStatesList);
 
 		} else if (loadBalancePolicy.equals(Constants.LOAD_BALANCE_BEE)){
-			this.loadBalancer = new BeeVmLoadBalancer(this);//TODO: change the class name and parameter
+			this.loadBalancer = new BeeVmLoadBalancer(this);
 
 		} else { //i.e. if (loadBalancePolicy.equals(Constants.LOAD_BALANCE_THROTTLED))
 			this.loadBalancer = new ThrottledVmLoadBalancer(this);
@@ -272,10 +273,17 @@ public class DatacenterController extends DatacenterBroker implements GeoLocatab
 																cl.getOriginator(),
 																cl.getAppId(),
 																requestsPerCloudlet);
+
 			subCloudlet.setParentId(cl.getCloudletId());
-			submitNewCloudlet(subCloudlet);	
+			submitNewCloudlet(subCloudlet);
+
+//			System.out.println("+++++++++DATA CENTRE CONTROLLER:: SUB-CLOUDLET++++++++++++");
+//			System.out.println("Cloudlet: " + subCloudlet);
+//			System.out.println("Request count: " + cl.getRequestCount());
+//			System.out.println("Data Size: " + cl.getDataSize());
+//			System.out.println("----------------------------------------------------------");
 		}
-		
+
 		//If there are any remaining, which didn't fit into a default sized group
 		int remainingRequests = numOfActualRequests - requestsPerCloudlet * numOfReqCloudlets;
 		if (remainingRequests != 0){
@@ -287,7 +295,7 @@ public class DatacenterController extends DatacenterBroker implements GeoLocatab
 																cl.getAppId(),
 																remainingRequests);
 			subCloudlet.setParentId(cl.getCloudletId());
-			submitNewCloudlet(subCloudlet);	
+			submitNewCloudlet(subCloudlet);
 		}
 				    
 		totalData += cl.getDataSize();
@@ -306,16 +314,23 @@ public class DatacenterController extends DatacenterBroker implements GeoLocatab
 		
 		submitWaitingCloudlet();
 	}
-	
-	private void submitWaitingCloudlet(){
+
+	/**
+	 *
+	 * submit queued cloudlet
+	 * =============================start====================================== */
+
+ 	private void submitWaitingCloudlet(){
 		int nextAvailVM = loadBalancer.getNextAvailableVm();
 				
-		if ((nextAvailVM != -1) && (waitingQueue.size() > 0)){
+		if ((nextAvailVM != -1) && (waitingQueue.size() > 0)){ //waitingqueue is internetcloudlet
 			InternetCloudlet cl = waitingQueue.remove(0);
 			submitCloudlet(cl, nextAvailVM);
 		}
 	}
-
+/**
+ * submit a new cloudlet
+ **/
 	private void submitNewCloudlet(InternetCloudlet cl) {
 		
 		hourlyArrival.addEvent(GridSim.clock(), cl.getRequestCount());
@@ -336,7 +351,9 @@ public class DatacenterController extends DatacenterBroker implements GeoLocatab
 		}				
 	}
 
-
+/**
+ * +++++++++Submit the cloudlet and notify the load balancer+++++++++
+ */
 	private void submitCloudlet(InternetCloudlet cl, int vmId) {
 		//submit to the next machine
 		cl.setVmId(vmId);
@@ -356,7 +373,10 @@ public class DatacenterController extends DatacenterBroker implements GeoLocatab
 		String destName = GridSim.getEntityName(dest);
 		InternetEntitityRegistry.getInstance().addCommunicationPath(cl.getOriginator().get_name(), destName);
 	}
-	
+	/**
+	 *
+	 * =================================end=================================================
+	 */
 	@Override
 	protected void processVMCreate(Sim_event ev) {			
 		int[] array = (int[]) ev.get_data();
@@ -419,11 +439,9 @@ public class DatacenterController extends DatacenterBroker implements GeoLocatab
 	public int getRegion() {
 		return region;
 	}
-	
 	public String getDataCenterName(){
 		return get_name().substring(0, get_name().indexOf("-Broker"));
 	}
-
 	public double getTotalCost(){
 		return getDataTransferCost() + getVmCost();
 	}
@@ -506,6 +524,4 @@ public class DatacenterController extends DatacenterBroker implements GeoLocatab
 	public int getAllRequestsProcessed() {
 		return allRequestsProcessed;
 	}
-	
-	
 }

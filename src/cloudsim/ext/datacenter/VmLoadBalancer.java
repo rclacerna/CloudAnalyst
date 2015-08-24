@@ -22,11 +22,11 @@ abstract public class VmLoadBalancer {
 	public VmLoadBalancer(){
 		vmAllocationCounts = new HashMap<Integer, Integer>();
 	}
-	
+
 	/**
 	 * The main contract of {@link VmLoadBalancer}. All load balancers should implement
 	 * this method according to their specific load balancing policy.
-	 * 
+	 *
 	 * @return id of the next available Virtual Machine to which the next task should be
 	 * 			allocated 
 	 */
@@ -38,6 +38,7 @@ abstract public class VmLoadBalancer {
 	 * 
 	 * @param currVm
 	 */
+
 	protected void allocatedVm(int currVm){
 		
 		Integer currCount = vmAllocationCounts.get(currVm);

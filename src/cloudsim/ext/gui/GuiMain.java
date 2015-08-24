@@ -37,7 +37,7 @@ import cloudsim.ext.gui.screens.ConfigureSimulationPanel;
 import cloudsim.ext.gui.screens.InternetCharacteristicsScreen;
 import cloudsim.ext.gui.screens.ResultsScreen;
 import cloudsim.ext.gui.screens.SimulationPanel;
-
+import cloudsim.ext.datacenter.KMeans;
 /**
  * The main class of the GUI. Sets up the UI, and controls the screen transitions.
  * 
@@ -295,7 +295,7 @@ private static final String CMD_ABOUT = "About";
 		messagePanel.revalidate();
 		this.repaint();
 	}
-	
+
 	private void showSimulationCancellingMessage(){
 		messagePanel.removeAll();
 		

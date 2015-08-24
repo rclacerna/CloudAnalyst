@@ -31,19 +31,19 @@ public class ThrottledVmLoadBalancer extends VmLoadBalancer implements CloudSimE
 	 * 
 	 * @param dcb The {@link DatacenterController} using the load balancer.
 	 */
-	public ThrottledVmLoadBalancer(DatacenterController dcb){
+	public ThrottledVmLoadBalancer(DatacenterController dcb) {
 		this.vmStatesList = dcb.getVmStatesList();
 		dcb.addCloudSimEventListener(this);
+
 	}
 
 	/**
-	 * @return VM id of the first available VM from the vmStatesList in the calling
-	 * 			{@link DatacenterController}
+	 * @return VM id of the first available VM from the vmStatesList in the calling* 			{@link DatacenterController}
 	 */
 	@Override
 	public int getNextAvailableVm(){
 		int vmId = -1;
-		
+
 		if (vmStatesList.size() > 0){
 			int temp;
 			for (Iterator<Integer> itr = vmStatesList.keySet().iterator(); itr.hasNext();){

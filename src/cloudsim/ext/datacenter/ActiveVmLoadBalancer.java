@@ -21,14 +21,13 @@ public class ActiveVmLoadBalancer extends VmLoadBalancer implements CloudSimEven
 	private Map<Integer, Integer> currentAllocationCounts;
 	
 	private Map<Integer, VirtualMachineState> vmStatesList;
-	
-	
+
 	public ActiveVmLoadBalancer(DatacenterController dcb){
 		dcb.addCloudSimEventListener(this);
-		this.vmStatesList = dcb.getVmStatesList();
+
+		System.out.println(this.vmStatesList = dcb.getVmStatesList());
 		this.currentAllocationCounts = Collections.synchronizedMap(new HashMap<Integer, Integer>());
 	}
-
 	/**
 	 * @return The VM id of a VM so that the number of active tasks on each VM is kept
 	 * 			evenly distributed among the VMs.
@@ -36,7 +35,6 @@ public class ActiveVmLoadBalancer extends VmLoadBalancer implements CloudSimEven
 	@Override
 	public int getNextAvailableVm(){
 		int vmId = -1;
-		
 		//Find the vm with least number of allocations
 		
 		//If all available vms are not allocated, allocated the new ones
@@ -50,7 +48,7 @@ public class ActiveVmLoadBalancer extends VmLoadBalancer implements CloudSimEven
 		} else {
 			int currCount;
 			int minCount = Integer.MAX_VALUE;
-			
+
 			for (int thisVmId : currentAllocationCounts.keySet()){
 				currCount = currentAllocationCounts.get(thisVmId);
 				if (currCount < minCount){
@@ -59,9 +57,7 @@ public class ActiveVmLoadBalancer extends VmLoadBalancer implements CloudSimEven
 				}
 			}
 		}
-		
 		allocatedVm(vmId);
-		
 		return vmId;
 		
 	}
@@ -87,8 +83,7 @@ public class ActiveVmLoadBalancer extends VmLoadBalancer implements CloudSimEven
 				currentAllocationCounts.put(vmId, currCount);
 			}
 		}
+
+
 	}
-	
-
-
 }
